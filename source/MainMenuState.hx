@@ -40,6 +40,7 @@ class MainMenuState extends MusicBeatState
 	var optionShit:Array<String> = [
 		'story_mode',
 		'freeplay',
+		'erect',
 		#if MODS_ALLOWED 'mods', #end
 		#if ACHIEVEMENTS_ALLOWED 'awards', #end
 		'credits',
@@ -57,6 +58,7 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
+	var loginKeys:Array<FlxKey>;
 
 	override function create()
 	{
@@ -72,6 +74,7 @@ class MainMenuState extends MusicBeatState
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
+		loginKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('login'));
 
 		camGame = new FlxCamera();
 		camAchievement = new FlxCamera();
@@ -338,6 +341,8 @@ class MainMenuState extends MusicBeatState
 									#if MODS_ALLOWED
 									case 'mods':
 										MusicBeatState.switchState(new ModsMenuState()); 
+									case 'erect':
+										LoadingState.loadAndSwitchState(new freeplay.ErectState());
 									#end
 									case 'awards':
 										MusicBeatState.switchState(new AchievementsMenuState());
@@ -358,6 +363,11 @@ class MainMenuState extends MusicBeatState
 				MusicBeatState.switchState(new MasterEditorMenu());
 			}
 			#end
+			else if (FlxG.keys.anyJustPressed(loginKeys))
+				{
+					selectedSomethin = true;
+					MusicBeatState.switchState(new gamejolt.GameJoltLogin());
+				}
 		}
 
 		super.update(elapsed);

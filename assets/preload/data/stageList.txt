@@ -1,9 +1,5 @@
 stage
-spooky
-philly
-limo
-mall
-mallEvil
-school
-schoolEvil
-tank
+whale
+goofy-ahh
+dumbass
+eitan

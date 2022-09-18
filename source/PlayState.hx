@@ -75,6 +75,8 @@ import sys.FileSystem;
 import vlc.MP4Handler;
 #end
 
+import gamejolt.GameJoltAPI;
+
 using StringTools;
 
 class PlayState extends MusicBeatState
@@ -85,16 +87,16 @@ class PlayState extends MusicBeatState
 	public static var cameramovingoffsetbf = 20; // idk why i made literally same variable
 
 	public static var ratingStuff:Array<Dynamic> = [
-		['F', 0.2], //From 0% to 19%
-		['E', 0.4], //From 20% to 39%
-		['D', 0.5], //From 40% to 49%
-		['C', 0.6], //From 50% to 59%
-		['B', 0.69], //From 60% to 68%
-		['A', 0.7], //69%
-		['AA', 0.8], //From 70% to 79%
-		['AAA', 0.9], //From 80% to 89%
-		['AAAA', 1], //From 90% to 99%
-		['AAAAA', 1] //The value on this one isn't used actually, since Perfect is always "1"
+		['Your run is fucked', 0.2], //From 0% to 19%
+		['Small Dick', 0.4], //From 20% to 39%
+		['Shit', 0.5], //From 40% to 49%
+		['Bad', 0.6], //From 50% to 59%
+		['OK', 0.69], //From 60% to 68%
+		['Nice :skull:', 0.7], //69%
+		['Good', 0.8], //From 70% to 79%
+		['Cool', 0.9], //From 80% to 89%
+		['Sick!!', 1], //From 90% to 99%
+		['PERFECT!!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
 	];
 	public static var animatedShaders:Map<String, DynamicShaderHandler> = new Map<String, DynamicShaderHandler>();
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
@@ -144,6 +146,7 @@ class PlayState extends MusicBeatState
 	public static var storyWeek:Int = 0;
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
+	public static var notStoryDifficulty:Int = 3;
 
 	public var spawnTime:Float = 2000;
 
@@ -2205,6 +2208,7 @@ class PlayState extends MusicBeatState
 	// For being able to mess with the sprites on Lua
 	public var countdownReady:FlxSprite;
 	public var countdownSet:FlxSprite;
+	public var countdownSus:FlxSprite;
 	public var countdownGo:FlxSprite;
 	public static var startOnTime:Float = 0;
 
@@ -2290,8 +2294,8 @@ class PlayState extends MusicBeatState
 				}
 
 				var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
-				introAssets.set('default', ['ready', 'set', 'go']);
-				introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel']);
+				introAssets.set('default', ['ready', 'set', 'sus', 'go']);
+				introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/sus-pixel', 'pixelUI/date-pixel']);
 
 				var introAlts:Array<String> = introAssets.get('default');
 				var antialias:Bool = ClientPrefs.globalAntialiasing;
@@ -2312,12 +2316,6 @@ class PlayState extends MusicBeatState
 				switch (swagCounter)
 				{
 					case 0:
-						if (FileSystem.exists(Paths.modsSounds('sounds', songName + '+' + 'intro3'))) {
-							FlxG.sound.play(Paths.sound(songName + '+' + 'intro3', 'ogg'), 0.6);
-						} else {
-							FlxG.sound.play(Paths.sound('intro3' + introSoundsSuffix), 0.6);
-						}
-					case 1:
 						countdownReady = new FlxSprite().loadGraphic(Paths.image(introAlts[0]));
 						countdownReady.cameras = [camHUD];
 						countdownReady.scrollFactor.set();
@@ -2337,12 +2335,12 @@ class PlayState extends MusicBeatState
 								countdownReady.destroy();
 							}
 						});
-						if (FileSystem.exists(Paths.modsSounds('sounds', songName + '+' + 'intro2'))) {
-							FlxG.sound.play(Paths.sound(songName + '+' + 'intro2', 'ogg'), 0.6);
+						if (FileSystem.exists(Paths.modsSounds('sounds', songName + '+' + 'intro3'))) {
+							FlxG.sound.play(Paths.sound(songName + '+' + 'intro3', 'ogg'), 0.6);
 						} else {
-							FlxG.sound.play(Paths.sound('intro2' + introSoundsSuffix), 0.6);
+							FlxG.sound.play(Paths.sound('intro3' + introSoundsSuffix), 0.6);
 						}
-					case 2:
+					case 1:
 						countdownSet = new FlxSprite().loadGraphic(Paths.image(introAlts[1]));
 						countdownSet.cameras = [camHUD];
 						countdownSet.scrollFactor.set();
@@ -2361,13 +2359,39 @@ class PlayState extends MusicBeatState
 								countdownSet.destroy();
 							}
 						});
+						if (FileSystem.exists(Paths.modsSounds('sounds', songName + '+' + 'intro2'))) {
+							FlxG.sound.play(Paths.sound(songName + '+' + 'intro2', 'ogg'), 0.6);
+						} else {
+							FlxG.sound.play(Paths.sound('intro2' + introSoundsSuffix), 0.6);
+						}
+					case 2:
+						countdownSus = new FlxSprite().loadGraphic(Paths.image(introAlts[2]));
+						countdownSus.cameras = [camHUD];
+						countdownSus.scrollFactor.set();
+
+						if (PlayState.isPixelStage)
+							countdownSus.setGraphicSize(Std.int(countdownSus.width * daPixelZoom));
+
+						countdownSus.updateHitbox();
+
+						countdownSus.screenCenter();
+						countdownSus.antialiasing = antialias;
+						insert(members.indexOf(notes), countdownSus);
+						FlxTween.tween(countdownSus, {/*y: countdownSus.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+							ease: FlxEase.cubeInOut,
+							onComplete: function(twn:FlxTween)
+							{
+								remove(countdownSus);
+								countdownSus.destroy();
+							}
+						});
 						if (FileSystem.exists(Paths.modsSounds('sounds', songName + '+' + 'intro1'))) {
 							FlxG.sound.play(Paths.sound(songName + '+' + 'intro1', 'ogg'), 0.6);
 						} else {
 							FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);
 						}
 					case 3:
-						countdownGo = new FlxSprite().loadGraphic(Paths.image(introAlts[2]));
+						countdownGo = new FlxSprite().loadGraphic(Paths.image(introAlts[3]));
 						countdownGo.cameras = [camHUD];
 						countdownGo.scrollFactor.set();
 
@@ -2392,7 +2416,6 @@ class PlayState extends MusicBeatState
 						} else {
 							FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);
 						}
-					case 4:
 				}
 
 				notes.forEachAlive(function(note:Note) {
@@ -2466,6 +2489,7 @@ class PlayState extends MusicBeatState
 
 	public function updateScore(miss:Bool = false)
 	{
+		GameJoltAPI.addScore(songScore, 760459, ?extraData:String);
 		if(ratingName == '?') {
 			scoreTxt.text = 'Score: ' + songScore 
 			+ ' | Combo Breaks: ' + songMisses 
@@ -4181,8 +4205,7 @@ class PlayState extends MusicBeatState
 		if(achievementObj != null) {
 			return;
 		} else {
-			var achieve:String = checkForAchievement(['week1_nomiss', 'week2_nomiss', 'week3_nomiss', 'week4_nomiss',
-				'week5_nomiss', 'week6_nomiss', 'week7_nomiss', 'ur_bad',
+			var achieve:String = checkForAchievement(['ada_nomiss', 'eliot_nomiss', 'seven_nomiss', 'ur_bad',
 				'ur_good', 'hype', 'two_keys', 'toastie', 'debugger']);
 
 			if(achieve != null) {
@@ -5563,6 +5586,7 @@ class PlayState extends MusicBeatState
 			if (bads > 0 || shits > 0) ratingFC = "FC";
 			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
 			else if (songMisses >= 10) ratingFC = "Clear";
+			else if (songMisses >= 50) ratingFC = "Shitty Clear";
 		}
 		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);
@@ -5581,26 +5605,18 @@ class PlayState extends MusicBeatState
 				var unlock:Bool = false;
 				switch(achievementName)
 				{
-					case 'week1_nomiss' | 'week2_nomiss' | 'week3_nomiss' | 'week4_nomiss' | 'week5_nomiss' | 'week6_nomiss' | 'week7_nomiss':
+					case 'ada_nomiss' | 'eliot_nomiss' | 'seven_nomiss':
 						if(isStoryMode && campaignMisses + songMisses < 1 && CoolUtil.difficultyString() == 'HARD' && storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
 						{
 							var weekName:String = WeekData.getWeekFileName();
 							switch(weekName) //I know this is a lot of duplicated code, but it's easier readable and you can add weeks with different names than the achievement tag
 							{
-								case 'week1':
-									if(achievementName == 'week1_nomiss') unlock = true;
-								case 'week2':
-									if(achievementName == 'week2_nomiss') unlock = true;
-								case 'week3':
-									if(achievementName == 'week3_nomiss') unlock = true;
-								case 'week4':
-									if(achievementName == 'week4_nomiss') unlock = true;
-								case 'week5':
-									if(achievementName == 'week5_nomiss') unlock = true;
-								case 'week6':
-									if(achievementName == 'week6_nomiss') unlock = true;
-								case 'week7':
-									if(achievementName == 'week7_nomiss') unlock = true;
+								case 'ada':
+									if(achievementName == 'ada_nomiss') unlock = true;
+									case 'eliot':
+									if(achievementName == 'eliot_nomiss') unlock = true;
+									case 'seven':
+									if(achievementName == 'seven_nomiss') unlock = true;
 							}
 						}
 					case 'ur_bad':

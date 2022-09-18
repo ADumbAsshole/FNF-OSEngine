@@ -17,6 +17,10 @@ using StringTools;
 
 class CoolUtil
 {
+	public static var notDefaultDifficulties:Array<String> = [
+		'Erect',
+		'Erect'
+	];
 	public static var defaultDifficulties:Array<String> = [
 		'Easy',
 		'Normal',

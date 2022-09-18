@@ -1,0 +1,76 @@
+{
+	"song": {
+		"events": [
+			[
+				45090.9090909091,
+				[
+					[
+						"Add Camera Zoom",
+						"0.035",
+						"0.045"
+					],
+					[
+						"Play Animation",
+						"duck",
+						"gf"
+					]
+				]
+			],
+			[
+				45454.5454545455,
+				[
+					[
+						"Add Camera Zoom",
+						"0.035",
+						"0.045"
+					],
+					[
+						"Play Animation",
+						"duck",
+						"gf"
+					]
+				]
+			],
+			[
+				45818.1818181818,
+				[
+					[
+						"Play Animation",
+						"duck",
+						"gf"
+					],
+					[
+						"Add Camera Zoom",
+						"0.035",
+						"0.045"
+					]
+				]
+			],
+			[
+				46181.8181818182,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"bf"
+					],
+					[
+						"Add Camera Zoom",
+						"0.035",
+						"0.045"
+					]
+				]
+			],
+			[
+				46545.4545454546,
+				[
+					[
+						"Add Camera Zoom",
+						"0",
+						"0"
+					]
+				]
+			]
+		]
+	}
+}

@@ -1,5 +1,7 @@
 package;
 
+import gamejolt.GameJoltToastManager;
+import gamejolt.GameJoltAPI;
 import flixel.graphics.FlxGraphic;
 import flixel.FlxG;
 import flixel.FlxGame;
@@ -27,6 +29,8 @@ using StringTools;
 
 class Main extends Sprite
 {
+	public static var gjToastManager:GameJoltToastManager;
+
 	var gameWidth:Int = 1280; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	var gameHeight:Int = 720; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	var initialState:Class<FlxState> = TitleState; // The FlxState the game starts with.
@@ -69,6 +73,8 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
+		gjToastManager = new GameJoltToastManager();
+addChild(gjToastManager);
 		var stageWidth:Int = Lib.current.stage.stageWidth;
 		var stageHeight:Int = Lib.current.stage.stageHeight;
 

@@ -1,5 +1,6 @@
 package;
 
+import gamejolt.GameJoltAPI;
 import flixel.FlxG;
 import flixel.util.FlxSave;
 import flixel.input.keyboard.FlxKey;
@@ -101,7 +102,9 @@ class ClientPrefs {
 		'volume_down'	=> [NUMPADMINUS, MINUS],
 		
 		'debug_1'		=> [SEVEN, NONE],
-		'debug_2'		=> [EIGHT, NONE]
+		'debug_2'		=> [EIGHT, NONE],
+
+		'login'			=> [L, NONE]
 	];
 	public static var defaultKeys:Map<String, Array<FlxKey>> = null;
 
@@ -173,6 +176,28 @@ class ClientPrefs {
 	}
 
 	public static function loadPrefs() {
+		        //GameJolt Things
+				if(FlxG.save.data.gjUser != null)
+					{
+						FlxG.save.data.gjUser = FlxG.save.data.gjUser;
+					}
+			
+					if (FlxG.save.data.gjToken != null)
+					{
+						FlxG.save.data.gjToken = FlxG.save.data.gjToken;
+					}
+			
+					if (FlxG.save.data.lbToggle == null)
+					{
+						FlxG.save.data.lbToggle = false;
+						FlxG.save.flush();
+					}
+			
+					if (FlxG.save.data.lbToggle != null)
+					{
+						GameJoltAPI.leaderboardToggle = FlxG.save.data.lbToggle;
+					}
+
 		if(FlxG.save.data.downScroll != null) {
 			downScroll = FlxG.save.data.downScroll;
 		}

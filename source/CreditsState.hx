@@ -86,6 +86,8 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+			['A Dumb Basement Team'],
+			['name', 'icon', 'description', 'link', 'colour'],
 			['OS Engine Team'],
 			['notweuz_', 'weuz', 'Main Programmer of OS Engine', 'https://twitter.com/notweuz_', '8633F2'],
 			['nelifs', 'nelifs', 'Second Programmer and Designer of OS Engine', 'https://github.com/nelifs', '1C1C1C'],

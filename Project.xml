@@ -2,7 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Friday Night Funkin': OS Engine" file="OS Engine" packageName="com.weuz.osengine" package="com.weuz.osengine" main="Main" version="0.2.8" company="weuz" />
+	<app title="A Dumb Basement" file="A Dumb Basement" packageName="com.adumbasshole.adumbbasement" package="com.adumbasshole.adumbbasement" main="Main" version="0.2.8" company="adumbasshole" />
 
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />
@@ -76,6 +76,11 @@
 		<library name="week5"         preload="true" />
 		<library name="week6"         preload="true" />
 		<library name="week7"         preload="true" />
+		<library name="ada"           preload="true" />
+		<library name="seven"           preload="true" />
+		<library name="shadow"           preload="true" />
+		<library name="hotracism"           preload="true" />
+
 	</section>
 	
 	<section if="NO_PRELOAD_ALL">
@@ -87,6 +92,10 @@
 		<library name="week5"         preload="false" />
 		<library name="week6"         preload="false" />
 		<library name="week7"         preload="false" />
+		<library name="ada"           preload="false" />
+		<library name="seven"           preload="false" />
+		<library name="shadow"           preload="false" />
+		<library name="hotracism"           preload="false" />
 	</section>
 	
 	<assets path="assets/videos"        library="videos"        if="VIDEOS_ALLOWED"/>
@@ -106,6 +115,14 @@
 	<assets path="assets/week6"         library="week6"         exclude="*.mp3" unless="web"/>
 	<assets path="assets/week7"         library="week7"         exclude="*.ogg" if="web"/>
 	<assets path="assets/week7"         library="week7"         exclude="*.mp3" unless="web"/>
+	<assets path="assets/ada"           library="ada"           exclude="*.ogg" if="web"/>
+	<assets path="assets/ada"           library="ada"           exclude="*.mp3" unless="web"/>
+	<assets path="assets/seven"           library="seven"           exclude="*.ogg" if="web"/>
+	<assets path="assets/seven"           library="seven"           exclude="*.mp3" unless="web"/>
+	<assets path="assets/shadow"           library="shadow"           exclude="*.ogg" if="web"/>
+	<assets path="assets/shadow"           library="shadow"           exclude="*.mp3" unless="web"/>
+	<assets path="assets/hotracism"           library="hotracism"           exclude="*.ogg" if="web"/>
+	<assets path="assets/hotracism"           library="hotracism"           exclude="*.mp3" unless="web"/>
 	
 	<section if="MODS_ALLOWED">
 		<assets path='example_mods' rename='mods' embed='false'/>

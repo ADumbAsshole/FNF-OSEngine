@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="menu_erect.png">
+	<!-- Created with Adobe Animate version 21.0.9.42677 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="erect basic0000" x="1003" y="331" width="351" height="122" frameX="0" frameY="0" frameWidth="355" frameHeight="133"/>
+	<SubTexture name="erect basic0001" x="1003" y="331" width="351" height="122" frameX="0" frameY="0" frameWidth="355" frameHeight="133"/>
+	<SubTexture name="erect basic0002" x="1003" y="331" width="351" height="122" frameX="0" frameY="0" frameWidth="355" frameHeight="133"/>
+	<SubTexture name="erect basic0003" x="1003" y="100" width="355" height="131" frameX="0" frameY="-2" frameWidth="355" frameHeight="133"/>
+	<SubTexture name="erect basic0004" x="1003" y="100" width="355" height="131" frameX="0" frameY="-2" frameWidth="355" frameHeight="133"/>
+	<SubTexture name="erect basic0005" x="1003" y="100" width="355" height="131" frameX="0" frameY="-2" frameWidth="355" frameHeight="133"/>
+	<SubTexture name="erect basic0006" x="547" y="335" width="347" height="121" frameX="-6" frameY="-4" frameWidth="355" frameHeight="133"/>
+	<SubTexture name="erect basic0007" x="547" y="335" width="347" height="121" frameX="-6" frameY="-4" frameWidth="355" frameHeight="133"/>
+	<SubTexture name="erect basic0008" x="547" y="335" width="347" height="121" frameX="-6" frameY="-4" frameWidth="355" frameHeight="133"/>
+	<SubTexture name="erect white0000" x="100" y="100" width="347" height="143" frameX="0" frameY="-2" frameWidth="359" frameHeight="145"/>
+	<SubTexture name="erect white0001" x="1458" y="100" width="334" height="136" frameX="-3" frameY="0" frameWidth="359" frameHeight="145"/>
+	<SubTexture name="erect white0002" x="547" y="100" width="356" height="135" frameX="-3" frameY="-2" frameWidth="359" frameHeight="145"/>
+</TextureAtlas>
